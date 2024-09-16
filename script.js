@@ -1,20 +1,23 @@
-// Todo: Make M+ M- and MC functional
-let string = "";
-let buttons = document.querySelectorAll('.button');
-Array.from(buttons).forEach((button)=>{
-  button.addEventListener('click', (e)=>{
-    if(e.target.innerHTML == '='){
-      string = eval(string);
-      document.querySelector('input').value = string;
+// Get the input element
+const input = document.querySelector('.input');
+
+// Get all buttons
+const buttons = document.querySelectorAll('.button');
+
+// Add click event listeners to all buttons
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const buttonText = button.textContent;
+
+    if (buttonText === 'C') {
+      // Clear the input field
+      input.value = '';
+    } else if (buttonText === '=') {
+      // Evaluate the expression
+      input.value = eval(input.value) || '';
+    } else {
+      // Append button text to input field
+      input.value += buttonText;
     }
-    else if(e.target.innerHTML == 'C'){
-      string = ""
-      document.querySelector('input').value = string;
-    }
-    else{ 
-    console.log(e.target)
-    string = string + e.target.innerHTML;
-    document.querySelector('input').value = string;
-      }
-  })
-})
+  });
+});
